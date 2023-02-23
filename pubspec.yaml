@@ -39,6 +39,7 @@ dependencies:
   fluttertoast: ^8.2.1
   dio: ^5.0.0
   flutter_easyloading: ^3.0.5
+  flutter_blue_plus: ^1.4.0
 
 dev_dependencies:
   flutter_test:

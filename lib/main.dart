@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plugin_demo/pages/blue/main.dart';
 import 'package:plugin_demo/pages/camera/main.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
@@ -65,7 +66,12 @@ class _MyHomePageState extends State<MyHomePage> {
               OutlinedButton(
                 child: const Text("蓝牙"),
                 onPressed: () {
-                  print('onPressed');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) {
+                      return const BluePage();
+                    }),
+                  );
                 },
               ),
             ],
