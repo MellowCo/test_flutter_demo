@@ -4,19 +4,20 @@
   // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
+  
     {
-      "name": "plugin_demo",
+      "name": "sdk_demo",
       "request": "launch",
       "type": "dart"
     },
     {
-      "name": "plugin_demo (profile mode)",
+      "name": "sdk_demo (profile mode)",
       "request": "launch",
       "type": "dart",
       "flutterMode": "profile"
     },
     {
-      "name": "plugin_demo (release mode)",
+      "name": "sdk_demo (release mode)",
       "request": "launch",
       "type": "dart",
       "flutterMode": "release"
