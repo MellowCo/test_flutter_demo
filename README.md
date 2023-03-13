@@ -479,7 +479,7 @@ final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
 
 
 
-> App Size
+> App Size： 导入 `apk体积文件`，生成可视化
 
 <img src="assets/app_size_analysis.png" alt="Screenshot of app size analysis" style="zoom: 50%;" />
 
@@ -545,16 +545,6 @@ Widget build(BuildContext context) {
 > 内存视图提供了应用程序内存分配的详细信息，以及用于检测和调试特定问题的工具。
 
 <img src="assets/image-20230313103629765.png" alt="image-20230313103629765" style="zoom:50%;" />
-
-
-
----
-
-### App Size
-
-> 导入 `apk体积文件`，生成可视化
-
-<img src="assets/image-20230313104500427.png" alt="image-20230313104500427" style="zoom:50%;" />
 
 
 
