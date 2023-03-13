@@ -540,7 +540,133 @@ Widget build(BuildContext context) {
 
 ---
 
+### Memory
+
+> 内存视图提供了应用程序内存分配的详细信息，以及用于检测和调试特定问题的工具。
+
+<img src="assets/image-20230313103629765.png" alt="image-20230313103629765" style="zoom:50%;" />
+
+
+
+---
+
+### App Size
+
+> 导入 `apk体积文件`，生成可视化
+
+<img src="assets/image-20230313104500427.png" alt="image-20230313104500427" style="zoom:50%;" />
+
+
+
+---
+
 ## 打包
 
+### 创建安卓密钥证书
 
+> keytool -genkey -v -keystore test-keystore.jks -storetype JKS -keyalg RSA -keysize 2048 -validity 10000 -alias test
+
+![image-20230313090000278](assets/image-20230313090000278.png)
+
+
+
+---
+
+### 配置密钥证书
+
+* 创建一个配置文件 `android/key.properties`
+
+```properties
+storePassword=<证书密码>
+keyPassword=<证书密码>
+keyAlias=test
+storeFile=<密钥证书地址>
+```
+
+* `android/app/build.gradle`: 加载`key.properties`,把以下代码，加在 `android` 代码块前
+
+```java
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('key.properties')
+if (keystorePropertiesFile.exists()) {
+     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
+android {
+    ...
+}
+```
+
+* 修改 `buildTypes` 代码块
+
+```java
+buildTypes {
+    release {
+        // TODO: Add your own signing config for the release build.
+        // Signing with the debug keys for now, so `flutter run --release` works.
+        signingConfig signingConfigs.debug
+    }
+}
+```
+
+> 修改为
+
+```java
+signingConfigs {
+    release {
+        keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
+            storePassword keystoreProperties['storePassword']
+    }
+}
+buildTypes {
+    release {
+        signingConfig signingConfigs.release
+    }
+}
+```
+
+
+
+---
+
+### 打包
+
+> 运行 `flutter build`
+
+```shell
+flutter build apk
+```
+
+<img src="assets/image-20230313093919677.png" alt="image-20230313093919677" style="zoom:50%;" />
+
+> 三种打包模式： `debug`、`profile`、`release`
+
+```shell
+flutter build apk --debug
+```
+
+> 修改打包参数`versionName`,`versionCode`
+>
+> 在`pubspec.yaml`,找到`version`,`1.0.0+1`,加号左侧为`versionName(1.0.0)`,加号右侧为`versionCode(1)`
+
+* pubspec.yaml
+
+```yaml
+version: 2.0.0+20230313
+```
+
+* 对应的`local.properties`
+
+```properties
+flutter.versionName=2.0.0
+flutter.versionCode=20230313
+```
+
+> 生成 `apk` 体积文件
+
+```shell
+flutter build apk --analyze-size --target-platform=android-arm64
+```
 
