@@ -535,3 +535,12 @@ Widget build(BuildContext context) {
 > 用于检查代码的执行时间(即调用此方法整个的生命周期时长)
 
 <img src="assets/image-20230303152216747.png" alt="image-20230303152216747" style="zoom: 50%;" />
+
+
+
+---
+
+## 打包
+
+
+
